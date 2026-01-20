@@ -74,6 +74,7 @@
     [dir="rtl"] body {
       font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
     }
+    
 
     .header-modern {
       background: var(--bg-header);
@@ -405,6 +406,38 @@
       opacity: 0; transition: opacity 0.5s; z-index: 3000; font-weight: 500;
     }
     #success-message.show { opacity: 1; }
+    /* FIX iPhone & small screens */
+@media (max-width: 480px) {
+
+  body {
+    padding-bottom: calc(90px + env(safe-area-inset-bottom));
+  }
+
+  .menu-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: stretch;
+  }
+
+  .price {
+    text-align: center;
+    font-size: 1.6rem;
+  }
+
+  .add-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+}
+   html, body {
+  min-height: 100%;
+  overflow-x: hidden;
+} 
   </style>
 </head>
 <body>
