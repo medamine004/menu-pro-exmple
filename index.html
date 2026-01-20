@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Café Tarek • Menu Digital</title>
+  <title>Café Amine • Menu Digital</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -17,15 +17,58 @@
       --gray: #95a5a6;
       --success: #27ae60;
       --danger: #e74c3c;
+      --gold: #f1c40f;
+      --gold-dark: #d4ac0d;
+
+      --bg-body: var(--light);
+      --text-main: var(--dark);
+      --bg-header: rgba(30, 39, 46, 0.94);
+      --text-header: white;
+      --bg-card: white;
+      --text-card-title: var(--dark);
+      --text-card-desc: #555;
+      --bg-category-btn: #dfe6e9;
+      --text-category-btn: var(--dark);
+      --shadow-card: 0 8px 24px rgba(0,0,0,0.10);
+      --shadow-deep: 0 22px 50px rgba(0,0,0,0.16);
+      --bg-marquee: linear-gradient(90deg, #c0392b, #e74c3c);
+      --text-marquee: white;
+      --bg-cart: white;
+      --text-cart: var(--dark);
+      --bg-modal: white;
+      --border-light: #eee;
+      --border-dark: #2d3748;
+    }
+
+    :root.dark {
+      --bg-body: #0f1419;
+      --text-main: #e8ecef;
+      --bg-header: rgba(15, 20, 25, 0.96);
+      --text-header: #f1f5f9;
+      --bg-card: #1a2129;
+      --text-card-title: #f1f5f9;
+      --text-card-desc: #cbd5e1;
+      --bg-category-btn: #2d3748;
+      --text-category-btn: #e2e8f0;
+      --shadow-card: 0 8px 32px rgba(0,0,0,0.45);
+      --shadow-deep: 0 22px 60px rgba(0,0,0,0.55);
+      --bg-marquee: linear-gradient(90deg, #7f1d1d, #991b1b);
+      --text-marquee: #fef2f2;
+      --bg-cart: #17212b;
+      --text-cart: #e8ecef;
+      --bg-modal: #1a2129;
+      --border-light: #2d3748;
+      --border-dark: #334155;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--light);
-      color: var(--dark);
+      background: var(--bg-body);
+      color: var(--text-main);
       line-height: 1.6;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
     [dir="rtl"] body {
@@ -33,14 +76,14 @@
     }
 
     .header-modern {
-      background: rgba(30, 39, 46, 0.92);
+      background: var(--bg-header);
       backdrop-filter: blur(12px);
-      color: white;
+      color: var(--text-header);
       padding: 1rem 1.8rem;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.28);
+      box-shadow: 0 4px 25px rgba(0,0,0,0.3);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -52,32 +95,59 @@
     .logo-container { display: flex; align-items: center; gap: 1.1rem; }
     [dir="rtl"] .logo-container { flex-direction: row-reverse; }
 
-    .logo { width: 58px; height: 58px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+    .logo { width: 58px; height: 58px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 14px rgba(0,0,0,0.4); }
     .brand-text h1 { font-size: 1.7rem; margin: 0; font-weight: 800; letter-spacing: -0.6px; }
-    .brand-text .slogan { font-size: 0.82rem; opacity: 0.78; margin: 2px 0 0; font-weight: 300; }
+    .brand-text .slogan { font-size: 0.82rem; opacity: 0.8; margin: 2px 0 0; font-weight: 300; }
 
-    .header-controls { display: flex; align-items: center; gap: 1.4rem; }
+    .header-controls { display: flex; align-items: center; gap: 1.1rem; }
     [dir="rtl"] .header-controls { flex-direction: row-reverse; }
 
-    .lang-switch { display: flex; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 4px; }
-    .lang-btn { background: transparent; border: none; color: white; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.25s; }
-    .lang-btn.active, .lang-btn:hover { background: var(--primary); box-shadow: 0 2px 10px rgba(192,57,43,0.4); }
+    .lang-switch { display: flex; background: rgba(255,255,255,0.12); border-radius: 8px; padding: 4px; }
+    .lang-btn { background: transparent; border: none; color: var(--text-header); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.25s; }
+    .lang-btn.active, .lang-btn:hover { background: var(--primary); box-shadow: 0 2px 10px rgba(192,57,43,0.45); }
 
-    .cart-btn { position: relative; background: none; border: none; color: white; font-size: 1.65rem; cursor: pointer; transition: transform 0.2s; }
-    .cart-btn:hover { transform: scale(1.12); }
-    .cart-count { position: absolute; top: -8px; right: -10px; background: var(--primary); color: white; font-size: 0.7rem; font-weight: bold; min-width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(192,57,43,0.5); }
-    [dir="rtl"] .cart-count { right: auto; left: -10px; }
+    .cart-btn, .theme-toggle-btn {
+      position: relative;
+      background: none;
+      border: none;
+      color: var(--text-header);
+      font-size: 1.65rem;
+      cursor: pointer;
+      transition: transform 0.25s, background 0.25s;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+
+    .cart-btn:hover, .theme-toggle-btn:hover {
+      transform: scale(1.12);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px; right: -6px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.68rem; font-weight: bold;
+      min-width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(192,57,43,0.55);
+    }
+    [dir="rtl"] .cart-count { right: auto; left: -6px; }
+
+    .theme-toggle-btn i { transition: transform 0.5s ease; }
+    :root.dark .theme-toggle-btn i { transform: rotate(180deg); }
 
     .promo-marquee {
-      background: linear-gradient(90deg, #c0392b, #e74c3c);
-      color: white;
+      background: var(--bg-marquee);
+      color: var(--text-marquee);
       overflow: hidden;
       white-space: nowrap;
-      height: 68px;
-      line-height: 68px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      box-shadow: 0 4px 14px rgba(192,57,43,0.45);
+      height: 68px; line-height: 68px;
+      font-size: 1.05rem; font-weight: 600;
+      box-shadow: 0 4px 14px rgba(192,57,43,0.5);
       z-index: 990;
     }
 
@@ -87,188 +157,218 @@
       animation: marquee 55s linear infinite;
     }
 
-    [dir="rtl"] .marquee-content {
-      animation: marquee-rtl 55s linear infinite;
-    }
+    [dir="rtl"] .marquee-content { animation: marquee-rtl 55s linear infinite; }
 
-    .marquee-content span {
-      margin: 0 4rem;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    .marquee-content span { margin: 0 4rem; display: inline-block; }
 
-    .marquee-content img {
-      height: 52px;
-      border-radius: 8px;
-      vertical-align: middle;
-      margin: 0 12px 0 0;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
-    }
+    @keyframes marquee    { 0% { transform: translateX(0);   } 100% { transform: translateX(-100%); } }
+    @keyframes marquee-rtl { 0% { transform: translateX(0);   } 100% { transform: translateX(100%);  } }
 
-    [dir="rtl"] .marquee-content img {
-      margin: 0 0 0 12px;
-    }
+    /* === NOUVEAU - Vidéo promotionnelle === */
+    .promo-video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 1.5rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
 
-    @keyframes marquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
+/* ratio افتراضي 16:9 */
+.promo-video-wrapper::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
 
-    @keyframes marquee-rtl {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(100%); }
-    }
+.promo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
 
-    .promo-marquee:hover .marquee-content { animation-play-state: paused; }
+/* هواتف صغيرة جدًا */
+@media (max-width: 480px) {
+  .promo-video-wrapper::before {
+    padding-top: 125%; /* 4:5 */
+  }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .promo-video-wrapper::before {
+    padding-top: 62%;
+  }
+}
+
+/* شاشات كبيرة */
+@media (min-width: 1400px) {
+  .promo-video-wrapper {
+    max-width: 1400px;
+  }
+}
+
+/* إخفاء أي controls نهائيًا */
+.promo-video::-webkit-media-controls {
+  display: none !important;
+}
 
     .container { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
     .categories { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1.8rem 0 2.5rem; justify-content: center; }
     [dir="rtl"] .categories { direction: rtl; }
 
-    .category-btn { padding: 0.7rem 1.5rem; border-radius: 50px; border: none; background: #dfe6e9; color: var(--dark); cursor: pointer; font-weight: 500; transition: all 0.3s; }
-    .category-btn.active, .category-btn:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 6px 16px rgba(192,57,43,0.25); }
+    .category-btn { 
+      padding: 0.7rem 1.5rem; border-radius: 50px; border: none;
+      background: var(--bg-category-btn); color: var(--text-category-btn);
+      cursor: pointer; font-weight: 500; transition: all 0.3s;
+    }
+    .category-btn.active, .category-btn:hover { 
+      background: var(--primary); color: white;
+      transform: translateY(-3px); box-shadow: 0 6px 16px rgba(192,57,43,0.3);
+    }
 
-    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.8rem; }
+    .menu-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); 
+      gap: 1.8rem; 
+    }
 
-    .menu-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.09); transition: all 0.35s; }
-    .menu-card:hover { transform: translateY(-10px); box-shadow: 0 16px 40px rgba(0,0,0,0.14); }
-    .menu-card img { width: 100%; height: 210px; object-fit: cover; }
+    .menu-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: all 0.4s ease;
+    }
 
-    .card-content { padding: 1.4rem; }
-    .card-title { font-size: 1.35rem; margin-bottom: 0.5rem; font-weight: 700; }
-    .card-category { font-size: 0.88rem; color: var(--gray); background: #f1f2f6; padding: 0.25rem 0.8rem; border-radius: 30px; display: inline-block; margin-bottom: 0.7rem; }
-    .card-desc { color: #555; font-size: 0.97rem; margin-bottom: 1.2rem; }
+    .menu-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-deep);
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .menu-card:hover .product-image { transform: scale(1.15) translateY(-12px); }
+
+    .image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.6s ease;
+    }
+    .menu-card:hover .image-overlay { opacity: 1; }
+
+    .card-content { padding: 1.5rem; }
+    .card-title { font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700; color: var(--text-card-title); }
+    .card-category { font-size: 0.88rem; color: var(--gray); background: var(--bg-category-btn); padding: 0.25rem 0.8rem; border-radius: 30px; display: inline-block; margin-bottom: 0.8rem; }
+
+    .rating-container { display: flex; align-items: center; gap: 0.6rem; margin: 0.8rem 0 1.1rem; }
+    .stars { position: relative; font-size: 1.22rem; letter-spacing: 1px; color: #e0e0e0; }
+    .stars .fill {
+      position: absolute; top: 0; left: 0; overflow: hidden;
+      color: transparent; background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+      -webkit-background-clip: text; background-clip: text;
+    }
+    .rating-text { font-size: 1rem; font-weight: 600; color: var(--text-card-desc); }
+
+    .card-desc { color: var(--text-card-desc); font-size: 0.98rem; margin-bottom: 1.3rem; }
 
     .card-footer { display: flex; justify-content: space-between; align-items: center; }
     [dir="rtl"] .card-footer { flex-direction: row-reverse; }
 
-    .price { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
-    .add-btn { background: var(--primary); color: white; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 600; }
-    .add-btn:hover { background: var(--primary-dark); }
+    .price { font-size: 1.48rem; font-weight: 800; color: var(--primary); }
+    .add-btn { 
+      background: var(--primary); color: white; border: none;
+      padding: 0.8rem 1.6rem; border-radius: 12px;
+      cursor: pointer; font-weight: 600; transition: all 0.25s;
+    }
+    .add-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
 
     .cart-panel {
       position: fixed; right: 0; top: 0; width: 400px; max-width: 92%; height: 100%;
-      background: white; box-shadow: -6px 0 30px rgba(0,0,0,0.28);
-      transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      background: var(--bg-cart); color: var(--text-cart);
+      box-shadow: -6px 0 30px rgba(0,0,0,0.28);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
       z-index: 2000; display: flex; flex-direction: column;
+      border-left: 1px solid var(--border-dark);
     }
 
     [dir="rtl"] .cart-panel {
       right: auto; left: 0; box-shadow: 6px 0 30px rgba(0,0,0,0.28);
       transform: translateX(-100%);
+      border-left: none; border-right: 1px solid var(--border-dark);
     }
 
     .cart-panel.open { transform: translateX(0); }
     [dir="rtl"] .cart-panel.open { transform: translateX(0); }
 
-    .cart-header { padding: 1.4rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .cart-header { padding: 1.4rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
     [dir="rtl"] .cart-header { flex-direction: row-reverse; }
 
     .cart-body { flex: 1; overflow-y: auto; padding: 1.2rem; }
 
     .cart-item {
-      display: flex; gap: 1.2rem; padding: 1.1rem 0; border-bottom: 1px solid #f0f0f0; position: relative;
+      display: flex; gap: 1.2rem; padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border-light); position: relative;
     }
     [dir="rtl"] .cart-item { flex-direction: row-reverse; text-align: right; }
 
     .cart-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: 10px; }
     .cart-item-info { flex: 1; }
     .remove-btn {
-      position: absolute; top: 12px; right: 8px; background: none; border: none;
-      color: var(--danger); font-size: 1.8rem; cursor: pointer;
+      position: absolute; top: 12px; right: 8px;
+      background: none; border: none; color: var(--danger); font-size: 1.8rem; cursor: pointer;
     }
     [dir="rtl"] .remove-btn { right: auto; left: 8px; }
 
-    .cart-total { padding: 1.4rem; border-top: 1px solid #eee; font-size: 1.4rem; font-weight: 700; background: #f9f9f9; text-align: right; }
+    .cart-total { padding: 1.4rem; border-top: 1px solid var(--border-light); font-size: 1.4rem; font-weight: 700; background: rgba(0,0,0,0.04); text-align: right; }
     [dir="rtl"] .cart-total { text-align: left; }
 
     .order-btn {
-      margin: 1.4rem; padding: 1.1rem; background: var(--success); color: white; border: none;
+      margin: 1.4rem; padding: 1.1rem;
+      background: var(--success); color: white; border: none;
       border-radius: 12px; font-size: 1.15rem; font-weight: 700; cursor: pointer;
     }
     .order-btn:hover { background: #219653; }
 
-    /* ─── NOUVEAU ─── Mode commande + Numéro de table ─────────────────────── */
-    .cart-mode-section {
-      padding: 1.4rem 1.4rem 0.8rem;
-      background: #f9f9f9;
-      border-top: 1px solid #eee;
-    }
-
-    .mode-radio-group {
-      display: flex;
-      gap: 1.8rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .mode-radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    .table-number-field {
-      margin-top: 0.4rem;
-    }
-
-    .table-number-field.hidden {
-      display: none;
-    }
-
-    .table-number-field label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    #table-number {
-      width: 100%;
-      padding: 0.9rem 1rem;
-      border: 2px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      transition: all 0.2s;
-    }
-
-    #table-number:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
-    }
-
-    #table-number:invalid:not(:placeholder-shown) {
-      border-color: var(--danger);
-      background-color: #fff5f5;
-    }
-
-    .error-message {
-      color: var(--danger);
-      font-size: 0.92rem;
-      margin-top: 0.5rem;
-      display: none;
-    }
-
     .modal {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 5000;
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.65); z-index: 5000;
       align-items: center; justify-content: center; backdrop-filter: blur(4px);
     }
+
     .modal-content {
-      background: white; border-radius: 16px; width: 90%; max-width: 500px; max-height: 90vh;
+      background: var(--bg-modal); color: var(--text-main);
+      border-radius: 16px; width: 90%; max-width: 500px; max-height: 90vh;
       overflow-y: auto; box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-      direction: ltr;
+      direction: ltr; border: 1px solid var(--border-dark);
     }
     [dir="rtl"] .modal-content { direction: rtl; }
 
-    .modal-header { padding: 1.3rem 1.6rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .modal-header { padding: 1.3rem 1.6rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
     [dir="rtl"] .modal-header { flex-direction: row-reverse; }
 
     .modal-title { margin: 0; font-size: 1.4rem; }
     .modal-close { background: none; border: none; font-size: 2.4rem; cursor: pointer; color: #777; }
+
     .modal-body { padding: 1.4rem 1.6rem; }
 
-    .supplement-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #f0f0f0; }
+    .supplement-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light); }
     [dir="rtl"] .supplement-item { flex-direction: row-reverse; }
 
     .supplement-info { flex: 1; }
@@ -277,196 +377,34 @@
 
     .quantity-control { display: flex; align-items: center; gap: 0.8rem; }
     .qty-btn {
-      width: 38px; height: 38px; border-radius: 50%; border: 1px solid #ddd; background: #f8f9fa;
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--border-light); background: rgba(0,0,0,0.04);
       font-size: 1.3rem; cursor: pointer; transition: all 0.2s;
+      color: var(--text-main);
     }
     .qty-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
     .qty-display { min-width: 38px; text-align: center; font-weight: 600; font-size: 1.1rem; }
 
     .modal-footer {
-      padding: 1.2rem 1.6rem; border-top: 1px solid #eee; display: flex;
-      justify-content: space-between; align-items: center;
+      padding: 1.2rem 1.6rem; border-top: 1px solid var(--border-light);
+      display: flex; justify-content: space-between; align-items: center;
     }
     [dir="rtl"] .modal-footer { flex-direction: row-reverse; }
 
     .product-total { font-size: 1.35rem; font-weight: bold; color: var(--primary); }
     .confirm-supplements-btn {
-      background: var(--success); color: white; border: none; padding: 0.95rem 2rem;
-      border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 1.1rem;
+      background: var(--success); color: white; border: none;
+      padding: 0.95rem 2rem; border-radius: 10px;
+      font-weight: 600; cursor: pointer; font-size: 1.1rem;
     }
 
     #success-message {
       position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-      background: var(--success); color: white; padding: 1.2rem 2.5rem; border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.5s; z-index: 3000;
-      font-weight: 500;
+      background: var(--success); color: white; padding: 1.2rem 2.5rem;
+      border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      opacity: 0; transition: opacity 0.5s; z-index: 3000; font-weight: 500;
     }
     #success-message.show { opacity: 1; }
-
-    @media (max-width: 768px) {
-      .menu-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-      .cart-panel { width: 90%; }
-    }
-
-    @media (max-width: 480px) {
-      body { font-size: 14px; }
-      .header-modern { flex-direction: column; gap: 0.8rem; padding: 1rem; text-align: center; }
-      .logo { width: 48px; height: 48px; }
-      .brand-text h1 { font-size: 1.3rem; }
-      .brand-text .slogan { font-size: 0.75rem; }
-      .promo-marquee { height: 52px; line-height: 52px; font-size: 0.85rem; }
-      .promo-marquee img { height: 36px; }
-      .container { padding: 1.2rem 0.9rem; }
-      .menu-grid { grid-template-columns: 1fr; gap: 1.2rem; }
-      .menu-card img { height: 180px; }
-      .cart-panel { width: 100%; max-width: 100%; }
-      .cart-item { flex-direction: column; align-items: flex-start; }
-      .cart-item-img { width: 100%; height: 140px; }
-      .mode-radio-group { flex-direction: column; gap: 0.9rem; }
-    }
-    /* شاشات صغيرة جدًا (iPhone SE / Android Small) */
-@media (max-width: 480px) {
-
-  body {
-    font-size: 14px;
-  }
-
-  .header-modern {
-    flex-direction: column;
-    gap: 0.8rem;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  .logo {
-    width: 48px;
-    height: 48px;
-  }
-
-  .brand-text h1 {
-    font-size: 1.3rem;
-  }
-
-  .brand-text .slogan {
-    font-size: 0.75rem;
-  }
-
-  .header-controls {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .promo-marquee {
-    height: 52px;
-    line-height: 52px;
-    font-size: 0.85rem;
-  }
-
-  .promo-marquee img {
-    height: 36px;
-  }
-
-  .container {
-    padding: 1.2rem 0.9rem;
-  }
-
-  .categories {
-    gap: 0.6rem;
-  }
-
-  .category-btn {
-    padding: 0.5rem 1.1rem;
-    font-size: 0.85rem;
-  }
-
-  .menu-grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-
-  .menu-card img {
-    height: 180px;
-  }
-
-  .card-title {
-    font-size: 1.15rem;
-  }
-
-  .card-desc {
-    font-size: 0.9rem;
-  }
-
-  .price {
-    font-size: 1.2rem;
-  }
-
-  .add-btn {
-    padding: 0.6rem 1.1rem;
-    font-size: 0.9rem;
-  }
-
-  /* PANIER */
-  .cart-panel {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .cart-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .cart-item-img {
-    width: 100%;
-    height: 140px;
-  }
-
-  .remove-btn {
-    top: 8px;
-    right: 8px;
-  }
-
-  .order-btn {
-    font-size: 1rem;
-    padding: 1rem;
-  }
-}
-
-/* هواتف متوسطة وكبيرة */
-@media (min-width: 481px) and (max-width: 768px) {
-
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .menu-card img {
-    height: 190px;
-  }
-
-  .cart-panel {
-    width: 92%;
-  }
-}
-
-/* تحسين اللمس (Touch Friendly) */
-button,
-.lang-btn,
-.category-btn,
-.add-btn,
-.qty-btn {
-  touch-action: manipulation;
-}
-
-/* منع مشاكل العرض بسبب صور كبيرة */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Scroll ناعم */
-html {
-  scroll-behavior: smooth;
-}
   </style>
 </head>
 <body>
@@ -475,8 +413,8 @@ html {
   <div class="logo-container">
     <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=100" alt="Café Amine" class="logo">
     <div class="brand-text">
-      <h1 id="brand-title">Café Tarek</h1>
-      <p class="slogan" id="brand-slogan">Saveurs authentiques depuis 2026</p>
+      <h1 id="brand-title">Café Amine</h1>
+      <p class="slogan" id="brand-slogan">Saveurs authentiques depuis 2023</p>
     </div>
   </div>
 
@@ -491,6 +429,10 @@ html {
       <i class="fas fa-bag-shopping"></i>
       <span class="cart-count" id="cart-count">0</span>
     </button>
+
+    <button class="theme-toggle-btn" id="theme-toggle" title="Changer le thème">
+      <i class="fas fa-moon"></i>
+    </button>
   </div>
 </header>
 
@@ -498,9 +440,25 @@ html {
   <div class="marquee-content">
     <span><strong id="promo-1">24H PROMO</strong> : <span id="promo-1-text">Pizza Margherita → 9,90 DT !</span></span>
     <span>Matin Boost : Espresso + Croissant → <strong>4,50 DT</strong></span>
-    <span>Jus d'orange frais → <strong>3,50 DT</strong> aujourd'hui !</span>
+    <span>Jus d'orange frais → <strong>3,50 DT</strong></span>
     <span>Thé à la menthe + Makroud → <strong>5,90 DT</strong></span>
   </div>
+</div>
+
+<!-- === VIDÉO PUBLICITAIRE (3-5 secondes, boucle infinie) === -->
+<div class="promo-video-wrapper">
+  <video
+    class="promo-video"
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="auto"
+    poster="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800"
+  >
+    <source src="video/pizza.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la vidéo.
+  </video>
 </div>
 
 <div class="container">
@@ -512,37 +470,36 @@ html {
 <div class="cart-panel" id="cart-panel">
   <div class="cart-header">
     <h2 id="cart-title">Votre commande</h2>
-    <button style="background:none;border:none;font-size:2.4rem;cursor:pointer;color:#555;" id="cart-close">×</button>
+    <button id="cart-close" style="background:none;border:none;font-size:2.4rem;cursor:pointer;color:#aaa;">×</button>
   </div>
   
   <div class="cart-body" id="cart-items"></div>
   
   <div class="cart-total" id="cart-total">Total : 0,00 DT</div>
 
-  <!-- ─── NOUVEAU : Choix mode + numéro de table ─── -->
-  <div class="cart-mode-section">
-    <div class="mode-radio-group">
-      <label>
-        <input type="radio" name="order-mode" value="surplace" checked>
-        Sur place
+  <div class="cart-mode-section" style="padding: 0 1.4rem 1.4rem;">
+    <div class="mode-radio-group" style="display:flex; gap:1.8rem; margin:1.2rem 0; font-size:1.05rem;">
+      <label style="cursor:pointer;">
+        <input type="radio" name="order-mode" value="surplace" checked> Sur place
       </label>
-      <label>
-        <input type="radio" name="order-mode" value="emporter">
-        À emporter
+      <label style="cursor:pointer;">
+        <input type="radio" name="order-mode" value="emporter"> À emporter
       </label>
     </div>
 
-    <div class="table-number-field" id="table-number-wrapper">
-      <label for="table-number">Numéro de table <span style="color:var(--danger);">*</span></label>
+    <div class="table-number-field" id="table-number-wrapper" style="margin-top:1.1rem;">
+      <label for="table-number">
+        Numéro de table <span style="color:var(--danger);">*</span>
+      </label>
       <input 
         type="number" 
         id="table-number" 
         min="1" 
         placeholder="Ex : 12" 
-        required
+        style="width:100%; padding:0.9rem; border-radius:8px; border:1px solid #ccc; font-size:1.05rem; transition:border-color 0.3s;"
       >
-      <div class="error-message" id="table-error">
-        Veuillez indiquer votre numéro de table
+      <div class="error-message" id="table-error" style="color:var(--danger); font-size:0.92rem; margin-top:0.5rem; display:none;">
+        Le numéro de table est requis pour une commande sur place
       </div>
     </div>
   </div>
@@ -562,6 +519,21 @@ html {
       <div class="product-total" id="modal-total">Total : 0,00 DT</div>
       <button class="confirm-supplements-btn" id="confirm-supplements">Ajouter au panier</button>
     </div>
+  </div>
+</div>
+
+<!-- WELCOME MODAL -->
+<div class="modal" id="welcome-modal" style="display: flex;">
+  <div class="modal-content" style="text-align:center; padding-bottom:2rem;">
+    <i class="fas fa-mug-saucer" style="font-size:4.5rem; color:var(--primary); margin:1.5rem 0;"></i>
+    <h2 class="welcome-title" style="margin:0.8rem 0;">Bienvenue chez Café Amine</h2>
+    <p style="margin:1.2rem 0; opacity:0.9;">
+      Découvrez un univers de saveurs authentiques préparées avec passion.<br>
+      Profitez dès maintenant de nos offres du jour !
+    </p>
+    <button id="welcome-continue" style="background:var(--primary); color:white; border:none; padding:1rem 2.5rem; border-radius:12px; font-size:1.15rem; font-weight:600; cursor:pointer;">
+      Découvrir le menu
+    </button>
   </div>
 </div>
 
@@ -625,14 +597,11 @@ const translations = {
 };
 
 const products = [
-  // (votre liste de produits reste identique – je ne la répète pas ici pour gagner de la place)
-  { id: "p1", name: {fr:"Margherita", en:"Margherita", ar:"مارغريتا"}, price: 9.90, category: {fr:"Pizzas", en:"Pizzas", ar:"البيتزا"}, description: {fr:"Sauce tomate, mozzarella, basilic frais", ar:"صلصة طماطم، موزاريلا، ريحان طازج"}, image: "https://images.unsplash.com/photo-1600028068383-ea11a7a101f3?w=600" },
-  // ... tous les autres produits ...
-  { id: "d4", name: {fr:"Mojito Virgin", en:"Virgin Mojito", ar:"موهيتو بدون كحول"}, price: 6.50, category: {fr:"Boissons fraîches", en:"Fresh Drinks", ar:"المشروبات الباردة"}, description: {fr:"Menthe, citron vert, soda", ar:"نعناع، ليمون أخضر، صودا"}, image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600" },
-  { id: "g1", name: {fr:"Coupe 2 parfums", en:"2 Scoops Cup", ar:"كأس بنكهتين"}, price: 8.00, category: {fr:"Glaces", en:"Ice Cream", ar:"المثلجات"}, description: {fr:"2 parfums + topping au choix", ar:"نكهتين + إضافة حسب الاختيار"}, image: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=600" },
-  
-  { id: "c1", name: {fr:"Espresso", en:"Espresso", ar:"إسبريسو"},          price: 2.80, category: {fr:"Cafés", en:"Coffee", ar:"القهوة"}, description: {fr:"Café court et intense", ar:"قهوة مركزة وقوية"}, image: "https://images.unsplash.com/photo-1494314671902-399b18174975?w=600" },
-  { id: "c2", name: {fr:"Cappuccino", en:"Cappuccino", ar:"كابتشينو"},      price: 5.50, category: {fr:"Cafés", en:"Coffee", ar:"القهوة"}, description: {fr:"Mousse de lait onctueuse", ar:"رغوة حليب كريمية"}, image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600" },
+  { id: "p1", name: {fr:"Margherita", en:"Margherita", ar:"مارغريتا"}, price: 9.90, category: {fr:"Pizzas", en:"Pizzas", ar:"البيتزا"}, description: {fr:"Sauce tomate, mozzarella, basilic frais", ar:"صلصة طماطم، موزاريلا، ريحان طازج"}, image: "https://images.unsplash.com/photo-1600028068383-ea11a7a101f3?w=600", rating: 4.7 },
+  { id: "d4", name: {fr:"Mojito Virgin", en:"Virgin Mojito", ar:"موهيتو بدون كحول"}, price: 6.50, category: {fr:"Boissons fraîches", en:"Fresh Drinks", ar:"المشروبات الباردة"}, description: {fr:"Menthe, citron vert, soda", ar:"نعناع، ليمون أخضر، صودا"}, image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600", rating: 4.5 },
+  { id: "g1", name: {fr:"Coupe 2 parfums", en:"2 Scoops Cup", ar:"كأس بنكهتين"}, price: 8.00, category: {fr:"Glaces", en:"Ice Cream", ar:"المثلجات"}, description: {fr:"2 parfums + topping au choix", ar:"نكهتين + إضافة حسب الاختيار"}, image: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=600", rating: 4.8 },
+  { id: "c1", name: {fr:"Espresso", en:"Espresso", ar:"إسبريسو"}, price: 2.80, category: {fr:"Cafés", en:"Coffee", ar:"القهوة"}, description: {fr:"Café court et intense", ar:"قهوة مركزة وقوية"}, image: "https://images.unsplash.com/photo-1494314671902-399b18174975?w=600", rating: 4.6 },
+  { id: "c2", name: {fr:"Cappuccino", en:"Cappuccino", ar:"كابتشينو"}, price: 5.50, category: {fr:"Cafés", en:"Coffee", ar:"القهوة"}, description: {fr:"Mousse de lait onctueuse", ar:"رغوة حليب كريمية"}, image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600", rating: 4.9 }
 ];
 
 const availableSupplements = {
@@ -641,18 +610,10 @@ const availableSupplements = {
     { id: "pz2", name: {fr:"Œuf", en:"Egg", ar:"بيضة"}, price: 2.00 },
     { id: "pz3", name: {fr:"Merguez", en:"Merguez", ar:"مرقاز"}, price: 3.50 }
   ],
-  "g1": [   // Coupe 2 parfums
-    { id: "top1", name: {fr:"Chantilly",         en:"Whipped Cream",  ar:"كريمة مخفوقة"},     price: 1.80 },
-    { id: "top2", name: {fr:"Sauce chocolat",    en:"Chocolate Sauce",ar:"صلصة شوكولاتة"},    price: 2.20 },
-    { id: "top3", name: {fr:"Sauce caramel",     en:"Caramel Sauce", ar:"صلصة كراميل"},      price: 2.20 },
-    { id: "top4", name: {fr:"Amandes grillées",  en:"Toasted Almonds",ar:"لوز محمص"},        price: 2.50 },
-    { id: "top5", name: {fr:"Noisettes concassées",en:"Crushed Hazelnuts",ar:"بندق مجروش"}, price: 2.80 },
-    { id: "top6", name: {fr:"Pépites de chocolat",en:"Chocolate Chips",ar:"قطع شوكولاتة"},  price: 2.00 },
-    { id: "top7", name: {fr:"Crumble spéculoos", en:"Speculoos Crumble",ar:"فتات سبيكولوس"},price: 2.30 },
-    { id: "top8", name: {fr:"Fraises fraîches",  en:"Fresh Strawberries",ar:"فراولة طازجة"}, price: 3.00 },
-  ],
-  
-  // ... autres suppléments ...
+  "g1": [
+    { id: "top1", name: {fr:"Chantilly", en:"Whipped Cream", ar:"كريمة مخفوقة"}, price: 1.80 },
+    { id: "top2", name: {fr:"Sauce chocolat", en:"Chocolate Sauce", ar:"صلصة شوكولاتة"}, price: 2.20 }
+  ]
 };
 
 // ──────────────────────────────────────────────────────────────
@@ -690,9 +651,12 @@ const closeModalBtn      = document.getElementById("close-modal");
 const tableNumberInput   = document.getElementById("table-number");
 const tableWrapper       = document.getElementById("table-number-wrapper");
 const tableError         = document.getElementById("table-error");
+const welcomeModal       = document.getElementById("welcome-modal");
+const welcomeContinue    = document.getElementById("welcome-continue");
+const themeToggle        = document.getElementById("theme-toggle");
 
 // ──────────────────────────────────────────────────────────────
-// FONCTIONS UTILITAIRES
+// FONCTIONS UTILIT Ascendant
 // ──────────────────────────────────────────────────────────────
 function t(key) {
   return translations[currentLang][key] || key;
@@ -732,8 +696,44 @@ function updateInterface() {
 }
 
 // ──────────────────────────────────────────────────────────────
-// CATÉGORIES & MENU  (inchangé)
+// THÈME
 // ──────────────────────────────────────────────────────────────
+function initTheme() {
+  const saved = localStorage.getItem("theme");
+  if (saved) {
+    htmlEl.classList.toggle("dark", saved === "dark");
+    themeToggle.innerHTML = saved === "dark" ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  } else {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const hour = new Date().getHours();
+    const darkByTime = hour >= 19 || hour < 7;
+    const isDark = prefersDark || darkByTime;
+    htmlEl.classList.toggle("dark", isDark);
+    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+}
+
+function toggleTheme() {
+  htmlEl.classList.toggle("dark");
+  const isDark = htmlEl.classList.contains("dark");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+  themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+
+themeToggle.addEventListener("click", toggleTheme);
+
+// ──────────────────────────────────────────────────────────────
+// WELCOME + CATÉGORIES + MENU
+// ──────────────────────────────────────────────────────────────
+if (localStorage.getItem('cafeAmineWelcomeSeen')) {
+  welcomeModal.style.display = 'none';
+}
+
+welcomeContinue.onclick = () => {
+  welcomeModal.style.display = 'none';
+  localStorage.setItem('cafeAmineWelcomeSeen', 'true');
+};
+
 function renderCategories() {
   const catNames = new Set(products.map(p => tl(p.category)));
   categoriesEl.innerHTML = "";
@@ -768,13 +768,25 @@ function filterAndRender() {
   menuGridEl.innerHTML = "";
 
   filtered.forEach(p => {
+    const rating = p.rating || 4.5;
+    const percent = (rating / 5) * 100;
+
     const card = document.createElement("div");
     card.className = "menu-card";
     card.innerHTML = `
-      <img src="${p.image}" alt="${tl(p.name)}">
+      <div class="product-image-wrapper">
+        <img src="${p.image}" alt="${tl(p.name)}" class="product-image">
+        <div class="image-overlay"></div>
+      </div>
       <div class="card-content">
         <div class="card-title">${tl(p.name)}</div>
         <div class="card-category">${tl(p.category)}</div>
+        
+        <div class="rating-container">
+          <div class="stars">★★★★★<div class="fill" style="width:${percent}%;">★★★★★</div></div>
+          <span class="rating-text">${rating.toFixed(1)}</span>
+        </div>
+
         <div class="card-desc">${tl(p.description)}</div>
         <div class="card-footer">
           <div class="price">${formatPrice(p.price)}</div>
@@ -787,7 +799,7 @@ function filterAndRender() {
 }
 
 // ──────────────────────────────────────────────────────────────
-// SUPPLÉMENTS & AJOUT PANIER  (inchangé)
+// SUPPLÉMENTS & PANIER
 // ──────────────────────────────────────────────────────────────
 function openSupplementsModal(productId) {
   const product = products.find(p => p.id === productId);
@@ -800,7 +812,6 @@ function openSupplementsModal(productId) {
   supplementsListEl.innerHTML = "";
 
   const supps = availableSupplements[product.id] || [];
-
   if (supps.length === 0) {
     addToCartDirect(product.id);
     return;
@@ -836,7 +847,7 @@ window.changeSupplementQty = function(sid, delta) {
     selectedSupplements.push(item);
   }
 
-  item.quantity = Math.max(0, item.quantity + delta);
+  item.quantity = Math.max(0, (item.quantity || 0) + delta);
 
   const el = supplementsListEl.querySelector(`[data-sid="${sid}"]`);
   if (el) el.textContent = item.quantity;
@@ -855,9 +866,7 @@ function addToCartDirect(id) {
   else cart.push({ ...p, quantity: 1, supplements: [] });
 
   updateCartDisplay();
-  successMsg.textContent = t("success");
-  successMsg.classList.add("show");
-  setTimeout(() => successMsg.classList.remove("show"), 2800);
+  showSuccess();
 }
 
 confirmSupplements.onclick = () => {
@@ -883,19 +892,19 @@ confirmSupplements.onclick = () => {
 
   supplementsModal.style.display = "none";
   updateCartDisplay();
-
-  successMsg.textContent = t("success");
-  successMsg.classList.add("show");
-  setTimeout(() => successMsg.classList.remove("show"), 2800);
+  showSuccess();
 };
 
 closeModalBtn.onclick = () => supplementsModal.style.display = "none";
 
 window.addToCart = id => openSupplementsModal(id);
 
-// ──────────────────────────────────────────────────────────────
-// PANIER
-// ──────────────────────────────────────────────────────────────
+function showSuccess() {
+  successMsg.textContent = t("success");
+  successMsg.classList.add("show");
+  setTimeout(() => successMsg.classList.remove("show"), 2800);
+}
+
 function updateCartDisplay() {
   cartItemsEl.innerHTML = "";
   let total = 0;
@@ -912,7 +921,7 @@ function updateCartDisplay() {
     let suppHtml = "";
 
     if (item.supplements?.length) {
-      suppHtml = '<div style="margin-top:0.4rem;font-size:0.9rem;color:#555;">';
+      suppHtml = '<div style="margin-top:0.4rem;font-size:0.9rem;color:#aaa;">';
       item.supplements.forEach(s => {
         const sTotal = s.price * s.quantity * item.quantity;
         itemTotal += sTotal;
@@ -961,16 +970,22 @@ confirmOrderBtn.onclick = () => {
     return;
   }
 
-  // Validation numéro de table si sur place
+  let hasError = false;
+
   if (orderMode === "surplace") {
     tableNumber = tableNumberInput.value.trim();
     if (!tableNumber) {
       tableError.style.display = "block";
+      tableNumberInput.style.borderColor = "var(--danger)";
       tableNumberInput.focus();
-      return;
+      hasError = true;
+    } else {
+      tableError.style.display = "none";
+      tableNumberInput.style.borderColor = "#ccc";
     }
-    tableError.style.display = "none";
   }
+
+  if (hasError) return;
 
   let greeting = {
     fr: "Bonjour ! Je voudrais commander :\n\n",
@@ -980,11 +995,10 @@ confirmOrderBtn.onclick = () => {
 
   let msg = greeting;
 
-  // Mode + numéro de table
   if (orderMode === "surplace") {
-    msg += `Numéro de table : ${tableNumber}\n\n`;
+    msg += `Table n° ${tableNumber}\n────────────────────\n`;
   } else {
-    msg += "Commande à emporter\n\n";
+    msg += "Commande à emporter\n────────────────────\n";
   }
 
   cart.forEach(item => {
@@ -1002,7 +1016,7 @@ confirmOrderBtn.onclick = () => {
     sum + item.price * item.quantity +
     (item.supplements?.reduce((a,b)=>a + b.price * b.quantity * item.quantity, 0) || 0), 0);
 
-  msg += `\n${t("total")} : ${formatPrice(grandTotal)}\n\nMerci !`;
+  msg += `\n────────────────────\n${t("total")} : ${formatPrice(grandTotal)}\n\nMerci beaucoup ! 😊`;
 
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   window.open(waUrl, "_blank");
@@ -1011,7 +1025,6 @@ confirmOrderBtn.onclick = () => {
   successMsg.classList.add("show");
   setTimeout(() => successMsg.classList.remove("show"), 3800);
 
-  // Reset
   cart = [];
   tableNumber = "";
   tableNumberInput.value = "";
@@ -1034,32 +1047,33 @@ document.querySelectorAll(".lang-btn").forEach(btn => {
   };
 });
 
-// Gestion mode commande ↔ numéro de table
 document.querySelectorAll('input[name="order-mode"]').forEach(radio => {
   radio.addEventListener('change', () => {
     orderMode = radio.value;
     if (orderMode === "surplace") {
-      tableWrapper.classList.remove("hidden");
-      tableNumberInput.setAttribute("required", "");
+      tableWrapper.style.display = "block";
+      tableNumberInput.required = true;
     } else {
-      tableWrapper.classList.add("hidden");
-      tableNumberInput.removeAttribute("required");
+      tableWrapper.style.display = "none";
+      tableNumberInput.required = false;
       tableNumberInput.value = "";
       tableError.style.display = "none";
+      tableNumberInput.style.borderColor = "#ccc";
     }
   });
 });
 
-// Masquer l'erreur quand on tape
 tableNumberInput.addEventListener("input", () => {
   if (tableNumberInput.value.trim()) {
     tableError.style.display = "none";
+    tableNumberInput.style.borderColor = "#ccc";
   }
 });
 
 // ──────────────────────────────────────────────────────────────
 // DÉMARRAGE
 // ──────────────────────────────────────────────────────────────
+initTheme();
 updateDirection();
 updateInterface();
 </script>
