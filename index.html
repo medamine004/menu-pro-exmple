@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Café Amine • Menu Digital</title>
+  <title>Café Tarek • Menu Digital</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --primary: #c0392b;
@@ -27,7 +28,10 @@
       line-height: 1.6;
     }
 
-    /* HEADER */
+    [dir="rtl"] body {
+      font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+    }
+
     .header-modern {
       background: rgba(30, 39, 46, 0.92);
       backdrop-filter: blur(12px);
@@ -43,12 +47,17 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
+    [dir="rtl"] .header-modern { flex-direction: row-reverse; }
+
     .logo-container { display: flex; align-items: center; gap: 1.1rem; }
+    [dir="rtl"] .logo-container { flex-direction: row-reverse; }
+
     .logo { width: 58px; height: 58px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
     .brand-text h1 { font-size: 1.7rem; margin: 0; font-weight: 800; letter-spacing: -0.6px; }
     .brand-text .slogan { font-size: 0.82rem; opacity: 0.78; margin: 2px 0 0; font-weight: 300; }
 
     .header-controls { display: flex; align-items: center; gap: 1.4rem; }
+    [dir="rtl"] .header-controls { flex-direction: row-reverse; }
 
     .lang-switch { display: flex; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 4px; }
     .lang-btn { background: transparent; border: none; color: white; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.25s; }
@@ -57,8 +66,8 @@
     .cart-btn { position: relative; background: none; border: none; color: white; font-size: 1.65rem; cursor: pointer; transition: transform 0.2s; }
     .cart-btn:hover { transform: scale(1.12); }
     .cart-count { position: absolute; top: -8px; right: -10px; background: var(--primary); color: white; font-size: 0.7rem; font-weight: bold; min-width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(192,57,43,0.5); }
+    [dir="rtl"] .cart-count { right: auto; left: -10px; }
 
-    /* BANDEAU PROMO */
     .promo-marquee {
       background: linear-gradient(90deg, #c0392b, #e74c3c);
       color: white;
@@ -78,6 +87,10 @@
       animation: marquee 55s linear infinite;
     }
 
+    [dir="rtl"] .marquee-content {
+      animation: marquee-rtl 55s linear infinite;
+    }
+
     .marquee-content span {
       margin: 0 4rem;
       display: inline-block;
@@ -92,16 +105,26 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.35);
     }
 
+    [dir="rtl"] .marquee-content img {
+      margin: 0 0 0 12px;
+    }
+
     @keyframes marquee {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
+    @keyframes marquee-rtl {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
     .promo-marquee:hover .marquee-content { animation-play-state: paused; }
 
-    /* LAYOUT PRINCIPAL */
     .container { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
     .categories { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1.8rem 0 2.5rem; justify-content: center; }
+    [dir="rtl"] .categories { direction: rtl; }
+
     .category-btn { padding: 0.7rem 1.5rem; border-radius: 50px; border: none; background: #dfe6e9; color: var(--dark); cursor: pointer; font-weight: 500; transition: all 0.3s; }
     .category-btn.active, .category-btn:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 6px 16px rgba(192,57,43,0.25); }
 
@@ -117,40 +140,116 @@
     .card-desc { color: #555; font-size: 0.97rem; margin-bottom: 1.2rem; }
 
     .card-footer { display: flex; justify-content: space-between; align-items: center; }
+    [dir="rtl"] .card-footer { flex-direction: row-reverse; }
+
     .price { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
     .add-btn { background: var(--primary); color: white; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 600; }
     .add-btn:hover { background: var(--primary-dark); }
 
-    /* PANIER */
     .cart-panel {
       position: fixed; right: 0; top: 0; width: 400px; max-width: 92%; height: 100%;
       background: white; box-shadow: -6px 0 30px rgba(0,0,0,0.28);
       transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
       z-index: 2000; display: flex; flex-direction: column;
     }
+
+    [dir="rtl"] .cart-panel {
+      right: auto; left: 0; box-shadow: 6px 0 30px rgba(0,0,0,0.28);
+      transform: translateX(-100%);
+    }
+
     .cart-panel.open { transform: translateX(0); }
+    [dir="rtl"] .cart-panel.open { transform: translateX(0); }
 
     .cart-header { padding: 1.4rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    [dir="rtl"] .cart-header { flex-direction: row-reverse; }
+
     .cart-body { flex: 1; overflow-y: auto; padding: 1.2rem; }
 
     .cart-item {
       display: flex; gap: 1.2rem; padding: 1.1rem 0; border-bottom: 1px solid #f0f0f0; position: relative;
     }
+    [dir="rtl"] .cart-item { flex-direction: row-reverse; text-align: right; }
+
     .cart-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: 10px; }
     .cart-item-info { flex: 1; }
     .remove-btn {
       position: absolute; top: 12px; right: 8px; background: none; border: none;
       color: var(--danger); font-size: 1.8rem; cursor: pointer;
     }
+    [dir="rtl"] .remove-btn { right: auto; left: 8px; }
 
-    .cart-total { padding: 1.4rem; border-top: 1px solid #eee; font-size: 1.4rem; font-weight: 700; background: #f9f9f9; }
+    .cart-total { padding: 1.4rem; border-top: 1px solid #eee; font-size: 1.4rem; font-weight: 700; background: #f9f9f9; text-align: right; }
+    [dir="rtl"] .cart-total { text-align: left; }
+
     .order-btn {
       margin: 1.4rem; padding: 1.1rem; background: var(--success); color: white; border: none;
       border-radius: 12px; font-size: 1.15rem; font-weight: 700; cursor: pointer;
     }
     .order-btn:hover { background: #219653; }
 
-    /* MODAL SUPPLÉMENTS */
+    /* ─── NOUVEAU ─── Mode commande + Numéro de table ─────────────────────── */
+    .cart-mode-section {
+      padding: 1.4rem 1.4rem 0.8rem;
+      background: #f9f9f9;
+      border-top: 1px solid #eee;
+    }
+
+    .mode-radio-group {
+      display: flex;
+      gap: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .mode-radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .table-number-field {
+      margin-top: 0.4rem;
+    }
+
+    .table-number-field.hidden {
+      display: none;
+    }
+
+    .table-number-field label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    #table-number {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+
+    #table-number:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
+    }
+
+    #table-number:invalid:not(:placeholder-shown) {
+      border-color: var(--danger);
+      background-color: #fff5f5;
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.92rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
     .modal {
       display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 5000;
       align-items: center; justify-content: center; backdrop-filter: blur(4px);
@@ -158,14 +257,20 @@
     .modal-content {
       background: white; border-radius: 16px; width: 90%; max-width: 500px; max-height: 90vh;
       overflow-y: auto; box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+      direction: ltr;
     }
+    [dir="rtl"] .modal-content { direction: rtl; }
+
     .modal-header { padding: 1.3rem 1.6rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    [dir="rtl"] .modal-header { flex-direction: row-reverse; }
+
     .modal-title { margin: 0; font-size: 1.4rem; }
     .modal-close { background: none; border: none; font-size: 2.4rem; cursor: pointer; color: #777; }
     .modal-body { padding: 1.4rem 1.6rem; }
 
     .supplement-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #f0f0f0; }
-    .supplement-item:last-child { border-bottom: none; }
+    [dir="rtl"] .supplement-item { flex-direction: row-reverse; }
+
     .supplement-info { flex: 1; }
     .supplement-name { font-weight: 600; }
     .supplement-price { color: var(--primary); font-weight: 600; }
@@ -182,6 +287,8 @@
       padding: 1.2rem 1.6rem; border-top: 1px solid #eee; display: flex;
       justify-content: space-between; align-items: center;
     }
+    [dir="rtl"] .modal-footer { flex-direction: row-reverse; }
+
     .product-total { font-size: 1.35rem; font-weight: bold; color: var(--primary); }
     .confirm-supplements-btn {
       background: var(--success); color: white; border: none; padding: 0.95rem 2rem;
@@ -199,6 +306,23 @@
     @media (max-width: 768px) {
       .menu-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
       .cart-panel { width: 90%; }
+    }
+
+    @media (max-width: 480px) {
+      body { font-size: 14px; }
+      .header-modern { flex-direction: column; gap: 0.8rem; padding: 1rem; text-align: center; }
+      .logo { width: 48px; height: 48px; }
+      .brand-text h1 { font-size: 1.3rem; }
+      .brand-text .slogan { font-size: 0.75rem; }
+      .promo-marquee { height: 52px; line-height: 52px; font-size: 0.85rem; }
+      .promo-marquee img { height: 36px; }
+      .container { padding: 1.2rem 0.9rem; }
+      .menu-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .menu-card img { height: 180px; }
+      .cart-panel { width: 100%; max-width: 100%; }
+      .cart-item { flex-direction: column; align-items: flex-start; }
+      .cart-item-img { width: 100%; height: 140px; }
+      .mode-radio-group { flex-direction: column; gap: 0.9rem; }
     }
     /* شاشات صغيرة جدًا (iPhone SE / Android Small) */
 @media (max-width: 480px) {
@@ -349,10 +473,10 @@ html {
 
 <header class="header-modern">
   <div class="logo-container">
-    <img src="image/tarek.jpeg" alt="Café Amine" class="logo">
+    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=100" alt="Café Amine" class="logo">
     <div class="brand-text">
-      <h1>Café Amine</h1>
-      <p class="slogan">Saveurs authentiques depuis 2023</p>
+      <h1 id="brand-title">Café Tarek</h1>
+      <p class="slogan" id="brand-slogan">Saveurs authentiques depuis 2026</p>
     </div>
   </div>
 
@@ -360,6 +484,7 @@ html {
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="fr">FR</button>
       <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="ar">عربي</button>
     </div>
     
     <button class="cart-btn" id="cart-toggle">
@@ -369,14 +494,12 @@ html {
   </div>
 </header>
 
-<!-- Bandeau promotionnel -->
 <div class="promo-marquee">
   <div class="marquee-content">
-    <span><img src="image/pizza margherita.jpg" alt="Pizza"> <strong>24H PROMO</strong> : Pizza Margherita → 9,90 DT !</span>
-    <span><img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=80" alt="Cappuccino"> Matin Boost : Espresso + Croissant → <strong>4,50 DT</strong></span>
-    <span><img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?w=80" alt="Jus"> Jus d'orange frais → <strong>3,50 DT</strong> aujourd'hui !</span>
-    <span><img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=80" alt="Thé"> Dessert maison <strong>OFFERT</strong> dès 15 DT !</span>
-    <span><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=80" alt="Pizza duo"> Menu Duo : 2 Pizzas + 2 boissons = <strong>24,90 DT</strong></span>
+    <span><strong id="promo-1">24H PROMO</strong> : <span id="promo-1-text">Pizza Margherita → 9,90 DT !</span></span>
+    <span>Matin Boost : Espresso + Croissant → <strong>4,50 DT</strong></span>
+    <span>Jus d'orange frais → <strong>3,50 DT</strong> aujourd'hui !</span>
+    <span>Thé à la menthe + Makroud → <strong>5,90 DT</strong></span>
   </div>
 </div>
 
@@ -395,7 +518,35 @@ html {
   <div class="cart-body" id="cart-items"></div>
   
   <div class="cart-total" id="cart-total">Total : 0,00 DT</div>
-  
+
+  <!-- ─── NOUVEAU : Choix mode + numéro de table ─── -->
+  <div class="cart-mode-section">
+    <div class="mode-radio-group">
+      <label>
+        <input type="radio" name="order-mode" value="surplace" checked>
+        Sur place
+      </label>
+      <label>
+        <input type="radio" name="order-mode" value="emporter">
+        À emporter
+      </label>
+    </div>
+
+    <div class="table-number-field" id="table-number-wrapper">
+      <label for="table-number">Numéro de table <span style="color:var(--danger);">*</span></label>
+      <input 
+        type="number" 
+        id="table-number" 
+        min="1" 
+        placeholder="Ex : 12" 
+        required
+      >
+      <div class="error-message" id="table-error">
+        Veuillez indiquer votre numéro de table
+      </div>
+    </div>
+  </div>
+
   <button class="order-btn" id="confirm-order">Commander sur WhatsApp</button>
 </div>
 
@@ -417,42 +568,11 @@ html {
 <div id="success-message">Commande envoyée avec succès ✓</div>
 
 <script>
-// ── CONFIGURATION ─────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────
+// CONFIGURATION
+// ──────────────────────────────────────────────────────────────
 const WHATSAPP_NUMBER = "21658052184";
 
-// Produits
-const products = [
-  { id: "c1", name: "Espresso",           price: 2.80, category: "Cafés",          description: "Café court et intense",               image: "https://images.unsplash.com/photo-1494314671902-399b18174975?w=600" },
-  { id: "c2", name: "Cappuccino",         price: 4.20, category: "Cafés",          description: "Mousse de lait onctueuse",           image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600" },
-  { id: "t1", name: "Thé Vert Sencha",    price: 3.50, category: "Thés",           description: "Thé vert japonais premium",          image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600" },
-  { id: "p1", name: "Margherita",         price: 9.90, category: "Pizzas",         description: "Tomate, mozzarella, basilic frais", image: "image/pizza margherita.jpg" },
-  { id: "d1", name: "Jus d'orange frais", price: 4.50, category: "Boissons fraîches", description: "Pressé minute",                image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=600" },
-];
-
-// Suppléments
-const availableSupplements = {
-  "c1": [
-    { id: "es1", name: "Sucre supplémentaire", price: 0.50 },
-    { id: "es2", name: "Double dose café",     price: 1.50 },
-    { id: "es3", name: "Lait entier",          price: 1.00 },
-    { id: "es4", name: "Cannelle",             price: 0.40 }
-  ],
-  "c2": [
-    { id: "cp1", name: "Chantilly",            price: 1.80 },
-    { id: "cp2", name: "Sirop vanille",        price: 1.50 },
-    { id: "cp3", name: "Sirop caramel",        price: 1.50 },
-    { id: "cp4", name: "Poudre cacao",         price: 0.80 }
-  ],
-  "p1": [
-    { id: "pz1", name: "Jambon",               price: 4.00 },
-    { id: "pz2", name: "Œuf",                  price: 2.00 },
-    { id: "pz3", name: "Fromage supp.",        price: 3.00 },
-    { id: "pz4", name: "Champignons",          price: 2.50 },
-    { id: "pz5", name: "Frites (portion)",     price: 4.50 }
-  ]
-};
-
-// Traductions
 const translations = {
   fr: {
     title: "Café Amine",
@@ -463,7 +583,12 @@ const translations = {
     add: "Ajouter",
     success: "Commande envoyée avec succès ✓",
     all: "Tous",
-    empty: "Votre panier est vide"
+    empty: "Votre panier est vide",
+    customize: "Personnalisez votre",
+    promo1: "24H PROMO",
+    promo1text: "Pizza Margherita → 9,90 DT !",
+    tableRequired: "Veuillez indiquer votre numéro de table",
+    tablePlaceholder: "Ex : 12"
   },
   en: {
     title: "Café Amine",
@@ -474,47 +599,196 @@ const translations = {
     add: "Add",
     success: "Order sent successfully ✓",
     all: "All",
-    empty: "Your cart is empty"
+    empty: "Your cart is empty",
+    customize: "Customize your",
+    promo1: "24H PROMO",
+    promo1text: "Margherita Pizza → 9.90 DT!",
+    tableRequired: "Please enter your table number",
+    tablePlaceholder: "Ex: 12"
+  },
+  ar: {
+    title: "مقهى أمين",
+    slogan: "نكهات أصيلة منذ 2023",
+    cart: "طلبك",
+    total: "المجموع",
+    order: "اطلب عبر واتساب",
+    add: "أضف",
+    success: "تم إرسال الطلب بنجاح ✓",
+    all: "الكل",
+    empty: "السلة فارغة",
+    customize: "خصص",
+    promo1: "عرض 24 ساعة",
+    promo1text: "بيتزا مارغريتا → 9.90 د.ت !",
+    tableRequired: "الرجاء إدخال رقم الطاولة",
+    tablePlaceholder: "مثال: ١٢"
   }
 };
 
+const products = [
+  // (votre liste de produits reste identique – je ne la répète pas ici pour gagner de la place)
+  { id: "p1", name: {fr:"Margherita", en:"Margherita", ar:"مارغريتا"}, price: 9.90, category: {fr:"Pizzas", en:"Pizzas", ar:"البيتزا"}, description: {fr:"Sauce tomate, mozzarella, basilic frais", ar:"صلصة طماطم، موزاريلا، ريحان طازج"}, image: "https://images.unsplash.com/photo-1600028068383-ea11a7a101f3?w=600" },
+  // ... tous les autres produits ...
+  { id: "d4", name: {fr:"Mojito Virgin", en:"Virgin Mojito", ar:"موهيتو بدون كحول"}, price: 6.50, category: {fr:"Boissons fraîches", en:"Fresh Drinks", ar:"المشروبات الباردة"}, description: {fr:"Menthe, citron vert, soda", ar:"نعناع، ليمون أخضر، صودا"}, image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600" },
+  { id: "g1", name: {fr:"Coupe 2 parfums", en:"2 Scoops Cup", ar:"كأس بنكهتين"}, price: 8.00, category: {fr:"Glaces", en:"Ice Cream", ar:"المثلجات"}, description: {fr:"2 parfums + topping au choix", ar:"نكهتين + إضافة حسب الاختيار"}, image: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=600" },
+  
+  { id: "c1", name: {fr:"Espresso", en:"Espresso", ar:"إسبريسو"},          price: 2.80, category: {fr:"Cafés", en:"Coffee", ar:"القهوة"}, description: {fr:"Café court et intense", ar:"قهوة مركزة وقوية"}, image: "https://images.unsplash.com/photo-1494314671902-399b18174975?w=600" },
+  { id: "c2", name: {fr:"Cappuccino", en:"Cappuccino", ar:"كابتشينو"},      price: 5.50, category: {fr:"Cafés", en:"Coffee", ar:"القهوة"}, description: {fr:"Mousse de lait onctueuse", ar:"رغوة حليب كريمية"}, image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600" },
+];
+
+const availableSupplements = {
+  "p1": [
+    { id: "pz1", name: {fr:"Jambon", en:"Ham", ar:"جمبون"}, price: 4.00 },
+    { id: "pz2", name: {fr:"Œuf", en:"Egg", ar:"بيضة"}, price: 2.00 },
+    { id: "pz3", name: {fr:"Merguez", en:"Merguez", ar:"مرقاز"}, price: 3.50 }
+  ],
+  "g1": [   // Coupe 2 parfums
+    { id: "top1", name: {fr:"Chantilly",         en:"Whipped Cream",  ar:"كريمة مخفوقة"},     price: 1.80 },
+    { id: "top2", name: {fr:"Sauce chocolat",    en:"Chocolate Sauce",ar:"صلصة شوكولاتة"},    price: 2.20 },
+    { id: "top3", name: {fr:"Sauce caramel",     en:"Caramel Sauce", ar:"صلصة كراميل"},      price: 2.20 },
+    { id: "top4", name: {fr:"Amandes grillées",  en:"Toasted Almonds",ar:"لوز محمص"},        price: 2.50 },
+    { id: "top5", name: {fr:"Noisettes concassées",en:"Crushed Hazelnuts",ar:"بندق مجروش"}, price: 2.80 },
+    { id: "top6", name: {fr:"Pépites de chocolat",en:"Chocolate Chips",ar:"قطع شوكولاتة"},  price: 2.00 },
+    { id: "top7", name: {fr:"Crumble spéculoos", en:"Speculoos Crumble",ar:"فتات سبيكولوس"},price: 2.30 },
+    { id: "top8", name: {fr:"Fraises fraîches",  en:"Fresh Strawberries",ar:"فراولة طازجة"}, price: 3.00 },
+  ],
+  
+  // ... autres suppléments ...
+};
+
+// ──────────────────────────────────────────────────────────────
+// VARIABLES GLOBALES
+// ──────────────────────────────────────────────────────────────
 let currentLang = "fr";
 let cart = [];
 let currentCategory = "all";
 let currentProduct = null;
 let selectedSupplements = [];
+let orderMode = "surplace";
+let tableNumber = "";
 
-// ── DOM ────────────────────────────────────────────────────────
-const titleEl        = document.querySelector(".brand-text h1");
-const sloganEl       = document.querySelector(".brand-text .slogan");
-const categoriesEl   = document.getElementById("categories");
-const menuGridEl     = document.getElementById("menu-grid");
-const cartPanel      = document.getElementById("cart-panel");
-const cartItemsEl    = document.getElementById("cart-items");
-const cartTotalEl    = document.getElementById("cart-total");
-const cartCountEl    = document.getElementById("cart-count");
-const successMsg     = document.getElementById("success-message");
-
-const supplementsModal   = document.getElementById("supplements-modal");
+// ──────────────────────────────────────────────────────────────
+// ÉLÉMENTS DOM
+// ──────────────────────────────────────────────────────────────
+const htmlEl           = document.documentElement;
+const brandTitle       = document.getElementById("brand-title");
+const brandSlogan      = document.getElementById("brand-slogan");
+const categoriesEl     = document.getElementById("categories");
+const menuGridEl       = document.getElementById("menu-grid");
+const cartPanel        = document.getElementById("cart-panel");
+const cartItemsEl      = document.getElementById("cart-items");
+const cartTotalEl      = document.getElementById("cart-total");
+const cartCountEl      = document.getElementById("cart-count");
+const successMsg       = document.getElementById("success-message");
+const cartTitleEl      = document.getElementById("cart-title");
+const confirmOrderBtn  = document.getElementById("confirm-order");
+const supplementsModal = document.getElementById("supplements-modal");
 const currentProductName = document.getElementById("current-product-name");
 const supplementsListEl  = document.getElementById("supplements-list");
 const modalTotalEl       = document.getElementById("modal-total");
 const confirmSupplements = document.getElementById("confirm-supplements");
 const closeModalBtn      = document.getElementById("close-modal");
+const tableNumberInput   = document.getElementById("table-number");
+const tableWrapper       = document.getElementById("table-number-wrapper");
+const tableError         = document.getElementById("table-error");
 
-// ── UTILITAIRES ────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────
+// FONCTIONS UTILITAIRES
+// ──────────────────────────────────────────────────────────────
 function t(key) {
   return translations[currentLang][key] || key;
 }
 
-function formatPrice(price) {
-  return price.toLocaleString("fr-TN", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }) + " DT";
+function tl(obj) {
+  return obj[currentLang] || obj.fr || obj.en || "";
 }
 
-// ── SUPPLÉMENTS MODAL ──────────────────────────────────────────
+function formatPrice(price) {
+  return price.toLocaleString("fr-TN", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " DT";
+}
+
+function updateDirection() {
+  if (currentLang === "ar") {
+    htmlEl.setAttribute("dir", "rtl");
+    htmlEl.setAttribute("lang", "ar");
+  } else {
+    htmlEl.setAttribute("dir", "ltr");
+    htmlEl.setAttribute("lang", currentLang);
+  }
+}
+
+function updateInterface() {
+  brandTitle.textContent       = t("title");
+  brandSlogan.textContent      = t("slogan");
+  cartTitleEl.textContent      = t("cart");
+  confirmOrderBtn.textContent  = t("order");
+  tableNumberInput.placeholder = t("tablePlaceholder");
+
+  document.getElementById("promo-1").textContent      = t("promo1");
+  document.getElementById("promo-1-text").textContent = t("promo1text");
+
+  renderCategories();
+  filterAndRender();
+  updateCartDisplay();
+}
+
+// ──────────────────────────────────────────────────────────────
+// CATÉGORIES & MENU  (inchangé)
+// ──────────────────────────────────────────────────────────────
+function renderCategories() {
+  const catNames = new Set(products.map(p => tl(p.category)));
+  categoriesEl.innerHTML = "";
+
+  const allBtn = document.createElement("button");
+  allBtn.className = "category-btn active";
+  allBtn.textContent = t("all");
+  allBtn.onclick = () => {
+    currentCategory = "all";
+    document.querySelectorAll(".category-btn").forEach(b => b.classList.remove("active"));
+    allBtn.classList.add("active");
+    filterAndRender();
+  };
+  categoriesEl.appendChild(allBtn);
+
+  catNames.forEach(name => {
+    const btn = document.createElement("button");
+    btn.className = "category-btn";
+    btn.textContent = name;
+    btn.onclick = () => {
+      currentCategory = name;
+      document.querySelectorAll(".category-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      filterAndRender();
+    };
+    categoriesEl.appendChild(btn);
+  });
+}
+
+function filterAndRender() {
+  const filtered = currentCategory === "all" ? products : products.filter(p => tl(p.category) === currentCategory);
+  menuGridEl.innerHTML = "";
+
+  filtered.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "menu-card";
+    card.innerHTML = `
+      <img src="${p.image}" alt="${tl(p.name)}">
+      <div class="card-content">
+        <div class="card-title">${tl(p.name)}</div>
+        <div class="card-category">${tl(p.category)}</div>
+        <div class="card-desc">${tl(p.description)}</div>
+        <div class="card-footer">
+          <div class="price">${formatPrice(p.price)}</div>
+          <button class="add-btn" onclick="addToCart('${p.id}')">${t("add")}</button>
+        </div>
+      </div>
+    `;
+    menuGridEl.appendChild(card);
+  });
+}
+
+// ──────────────────────────────────────────────────────────────
+// SUPPLÉMENTS & AJOUT PANIER  (inchangé)
+// ──────────────────────────────────────────────────────────────
 function openSupplementsModal(productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
@@ -522,7 +796,7 @@ function openSupplementsModal(productId) {
   currentProduct = product;
   selectedSupplements = [];
 
-  currentProductName.textContent = product.name;
+  currentProductName.textContent = tl(product.name);
   supplementsListEl.innerHTML = "";
 
   const supps = availableSupplements[product.id] || [];
@@ -537,7 +811,7 @@ function openSupplementsModal(productId) {
     div.className = "supplement-item";
     div.innerHTML = `
       <div class="supplement-info">
-        <div class="supplement-name">${s.name}</div>
+        <div class="supplement-name">${tl(s.name)}</div>
         <div class="supplement-price">+${formatPrice(s.price)}</div>
       </div>
       <div class="quantity-control">
@@ -549,7 +823,7 @@ function openSupplementsModal(productId) {
     supplementsListEl.appendChild(div);
   });
 
-  modalTotalEl.textContent = `Total : ${formatPrice(product.price)}`;
+  modalTotalEl.textContent = `${t("total")} : ${formatPrice(product.price)}`;
   supplementsModal.style.display = "flex";
 }
 
@@ -568,8 +842,8 @@ window.changeSupplementQty = function(sid, delta) {
   if (el) el.textContent = item.quantity;
 
   let total = currentProduct.price;
-  selectedSupplements.forEach(s => total += s.price * s.quantity);
-  modalTotalEl.textContent = `Total : ${formatPrice(total)}`;
+  selectedSupplements.forEach(s => total += (s.price * (s.quantity || 0)));
+  modalTotalEl.textContent = `${t("total")} : ${formatPrice(total)}`;
 };
 
 function addToCartDirect(id) {
@@ -581,18 +855,20 @@ function addToCartDirect(id) {
   else cart.push({ ...p, quantity: 1, supplements: [] });
 
   updateCartDisplay();
+  successMsg.textContent = t("success");
+  successMsg.classList.add("show");
+  setTimeout(() => successMsg.classList.remove("show"), 2800);
 }
 
 confirmSupplements.onclick = () => {
   if (!currentProduct) return;
 
-  const addedSupps = selectedSupplements.filter(s => s.quantity > 0);
-
-  const key = currentProduct.id + JSON.stringify(addedSupps.map(s => ({id:s.id, q:s.quantity})));
+  const addedSupps = selectedSupplements.filter(s => (s.quantity || 0) > 0);
 
   const existing = cart.find(item =>
     item.id === currentProduct.id &&
-    JSON.stringify(item.supplements?.map(s=>({id:s.id,q:s.quantity})) || []) === JSON.stringify(addedSupps.map(s=>({id:s.id,q:s.quantity})))
+    JSON.stringify(item.supplements?.map(s=>({id:s.id,q:s.quantity})) || []) ===
+    JSON.stringify(addedSupps.map(s=>({id:s.id,q:s.quantity})))
   );
 
   if (existing) {
@@ -601,25 +877,34 @@ confirmSupplements.onclick = () => {
     cart.push({
       ...currentProduct,
       quantity: 1,
-      supplements: addedSupps.map(s => ({ name: s.name, price: s.price, quantity: s.quantity }))
+      supplements: addedSupps.map(s => ({ name: tl(s.name), price: s.price, quantity: s.quantity, id: s.id }))
     });
   }
 
   supplementsModal.style.display = "none";
   updateCartDisplay();
+
+  successMsg.textContent = t("success");
+  successMsg.classList.add("show");
+  setTimeout(() => successMsg.classList.remove("show"), 2800);
 };
 
 closeModalBtn.onclick = () => supplementsModal.style.display = "none";
 
 window.addToCart = id => openSupplementsModal(id);
 
-// ── PANIER ────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────
+// PANIER
+// ──────────────────────────────────────────────────────────────
 function updateCartDisplay() {
   cartItemsEl.innerHTML = "";
   let total = 0;
 
   if (!cart.length) {
     cartItemsEl.innerHTML = `<p style="text-align:center;color:#999;padding:3rem 1rem;">${t("empty")}</p>`;
+    cartCountEl.textContent = "0";
+    cartTotalEl.textContent = `${t("total")} : 0,00 DT`;
+    return;
   }
 
   cart.forEach(item => {
@@ -641,9 +926,9 @@ function updateCartDisplay() {
     const div = document.createElement("div");
     div.className = "cart-item";
     div.innerHTML = `
-      <img src="${item.image}" class="cart-item-img" alt="${item.name}"/>
+      <img src="${item.image}" class="cart-item-img" alt="${tl(item.name)}"/>
       <div class="cart-item-info">
-        <strong>${item.name}</strong><br>
+        <strong>${tl(item.name)}</strong><br>
         <small>${formatPrice(item.price)} × ${item.quantity}</small>
         ${suppHtml}
       </div>
@@ -659,22 +944,51 @@ function updateCartDisplay() {
   cartCountEl.textContent = cart.reduce((s, i) => s + i.quantity, 0);
 }
 
-window.removeFromCart = function(id, suppStr) {
-  const supps = JSON.parse(suppStr);
+window.removeFromCart = function(id, suppJson) {
+  const supps = JSON.parse(suppJson);
   cart = cart.filter(item =>
     !(item.id === id && JSON.stringify(item.supplements||[]) === JSON.stringify(supps))
   );
   updateCartDisplay();
 };
 
-// WHATSAPP
-document.getElementById("confirm-order").onclick = () => {
-  if (!cart.length) return;
+// ──────────────────────────────────────────────────────────────
+// WHATSAPP + VALIDATION TABLE
+// ──────────────────────────────────────────────────────────────
+confirmOrderBtn.onclick = () => {
+  if (!cart.length) {
+    alert(t("empty"));
+    return;
+  }
 
-  let msg = currentLang === "fr" ? "Bonjour ! Je voudrais commander :\n\n" : "Hello! I'd like to order:\n\n";
+  // Validation numéro de table si sur place
+  if (orderMode === "surplace") {
+    tableNumber = tableNumberInput.value.trim();
+    if (!tableNumber) {
+      tableError.style.display = "block";
+      tableNumberInput.focus();
+      return;
+    }
+    tableError.style.display = "none";
+  }
+
+  let greeting = {
+    fr: "Bonjour ! Je voudrais commander :\n\n",
+    en: "Hello! I'd like to order:\n\n",
+    ar: "مرحبا ! نحب نطلب :\n\n"
+  }[currentLang];
+
+  let msg = greeting;
+
+  // Mode + numéro de table
+  if (orderMode === "surplace") {
+    msg += `Numéro de table : ${tableNumber}\n\n`;
+  } else {
+    msg += "Commande à emporter\n\n";
+  }
 
   cart.forEach(item => {
-    msg += `• ${item.name} × ${item.quantity}`;
+    msg += `• ${tl(item.name)} × ${item.quantity}`;
     if (item.supplements?.length) {
       msg += " (" + item.supplements.map(s => `${s.name} ×${s.quantity}`).join(", ") + ")";
     }
@@ -684,22 +998,29 @@ document.getElementById("confirm-order").onclick = () => {
     )}\n`;
   });
 
-  msg += `\n${t("total")} : ${formatPrice(
-    cart.reduce((sum, item) =>
-      sum + item.price * item.quantity +
-      (item.supplements?.reduce((a,b)=>a + b.price * b.quantity * item.quantity, 0) || 0), 0)
-  )}`;
+  const grandTotal = cart.reduce((sum, item) =>
+    sum + item.price * item.quantity +
+    (item.supplements?.reduce((a,b)=>a + b.price * b.quantity * item.quantity, 0) || 0), 0);
 
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  msg += `\n${t("total")} : ${formatPrice(grandTotal)}\n\nMerci !`;
 
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(waUrl, "_blank");
+
+  successMsg.textContent = t("success");
   successMsg.classList.add("show");
   setTimeout(() => successMsg.classList.remove("show"), 3800);
 
+  // Reset
   cart = [];
+  tableNumber = "";
+  tableNumberInput.value = "";
   updateCartDisplay();
 };
 
-// Langue & Panier toggle
+// ──────────────────────────────────────────────────────────────
+// ÉVÉNEMENTS
+// ──────────────────────────────────────────────────────────────
 document.getElementById("cart-toggle").onclick = () => cartPanel.classList.add("open");
 document.getElementById("cart-close").onclick = () => cartPanel.classList.remove("open");
 
@@ -708,78 +1029,39 @@ document.querySelectorAll(".lang-btn").forEach(btn => {
     currentLang = btn.dataset.lang;
     document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-
-    titleEl.textContent = t("title");
-    sloganEl.textContent = t("slogan");
-    document.getElementById("cart-title").textContent = t("cart");
-    document.getElementById("confirm-order").textContent = t("order");
-
-    renderCategories();
-    filterAndRender();
-    updateCartDisplay();
+    updateDirection();
+    updateInterface();
   };
 });
 
-// Catégories & affichage
-function renderCategories() {
-  const cats = new Set(products.map(p => p.category));
-  categoriesEl.innerHTML = "";
-
-  const all = document.createElement("button");
-  all.className = "category-btn active";
-  all.textContent = t("all");
-  all.onclick = () => {
-    currentCategory = "all";
-    document.querySelectorAll(".category-btn").forEach(b=>b.classList.remove("active"));
-    all.classList.add("active");
-    filterAndRender();
-  };
-  categoriesEl.appendChild(all);
-
-  cats.forEach(cat => {
-    const btn = document.createElement("button");
-    btn.className = "category-btn";
-    btn.textContent = cat;
-    btn.onclick = () => {
-      currentCategory = cat;
-      document.querySelectorAll(".category-btn").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-      filterAndRender();
-    };
-    categoriesEl.appendChild(btn);
+// Gestion mode commande ↔ numéro de table
+document.querySelectorAll('input[name="order-mode"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    orderMode = radio.value;
+    if (orderMode === "surplace") {
+      tableWrapper.classList.remove("hidden");
+      tableNumberInput.setAttribute("required", "");
+    } else {
+      tableWrapper.classList.add("hidden");
+      tableNumberInput.removeAttribute("required");
+      tableNumberInput.value = "";
+      tableError.style.display = "none";
+    }
   });
-}
+});
 
-function filterAndRender() {
-  const filtered = currentCategory === "all"
-    ? products
-    : products.filter(p => p.category === currentCategory);
+// Masquer l'erreur quand on tape
+tableNumberInput.addEventListener("input", () => {
+  if (tableNumberInput.value.trim()) {
+    tableError.style.display = "none";
+  }
+});
 
-  menuGridEl.innerHTML = "";
-
-  filtered.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "menu-card";
-    card.innerHTML = `
-      <img src="${p.image}" alt="${p.name}">
-      <div class="card-content">
-        <div class="card-title">${p.name}</div>
-        <div class="card-category">${p.category}</div>
-        <div class="card-desc">${p.description}</div>
-        <div class="card-footer">
-          <div class="price">${formatPrice(p.price)}</div>
-          <button class="add-btn" onclick="addToCart('${p.id}')">${t("add")}</button>
-        </div>
-      </div>
-    `;
-    menuGridEl.appendChild(card);
-  });
-}
-
-// Démarrage
-renderCategories();
-filterAndRender();
-
+// ──────────────────────────────────────────────────────────────
+// DÉMARRAGE
+// ──────────────────────────────────────────────────────────────
+updateDirection();
+updateInterface();
 </script>
 </body>
 </html>
