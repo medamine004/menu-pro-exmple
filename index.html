@@ -81,9 +81,12 @@
   backdrop-filter: blur(12px);
   color: var(--text-header);
   padding: 0.8rem 1rem;
+
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 2000;
+
   box-shadow: 0 4px 25px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
@@ -96,6 +99,8 @@
   gap: 0.4rem;
   flex-shrink: 0;
 }
+  
+   
 
     [dir="rtl"] .header-modern { flex-direction: row-reverse; }
 
@@ -440,15 +445,15 @@
     font-size: 1.1rem;
   }
 }
-   html, body {
-  min-height: 100%;
-  overflow-x: hidden;
-} 
+  
 @media (max-width: 480px) {
 
   .brand-text h1 {
     font-size: 1.25rem;
   }
+  body {
+  overflow-x: hidden;
+}
 
   .brand-text .slogan {
     font-size: 0.7rem;
